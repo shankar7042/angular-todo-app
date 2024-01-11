@@ -8,13 +8,14 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from './todo';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 const LOCALSTORAGE_KEY = 'angular-todos';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TodoListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -93,11 +94,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.handleTodoChanges();
   }
 
-  handleEditTodo(event: FocusEvent, id: string) {
+  handleEditTodo({ event, id }: { event: FocusEvent; id: string }) {
     this.editTodo(event, id);
   }
 
-  handleKeyPressEvent(event: KeyboardEvent, id: string) {
+  handleKeyPressEvent({ event, id }: { event: KeyboardEvent; id: string }) {
     if (event.key === 'Enter' || event.key === 'Escape') {
       this.editTodo(event, id);
     }
